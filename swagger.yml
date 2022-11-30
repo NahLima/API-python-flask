@@ -10,10 +10,31 @@ servers:
 paths:
   /employees:
     get:
-      operationId: "employees.read_all"
+      operationId: "services.read_all_employees"
       tags:
         - "Employees"
       summary: "Read the list of employees"
       responses:
         "200":
           description: "Successfully read employees list"
+
+  /departments:
+    get:
+      operationId: "services.read_all_departments"
+      tags:
+        - "Departments"
+      summary: "Read the list of departments"
+      responses:
+        "200":
+          description: "Successfully read departments list"
+
+  /dependents:
+    get:
+      operationId: "services.read_all_dependents"
+      tags:
+        - "Dependents"
+      summary: "Read the list of employees by department"
+      responses:
+        "200":
+          description: "Successfully read employees by department list"
+
