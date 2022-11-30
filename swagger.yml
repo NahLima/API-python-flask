@@ -1,0 +1,19 @@
+openapi: 3.0.0
+info:
+  title: "API Flask"
+  description: "Departaments and Employees"
+  version: "1.0.0"
+
+  servers:
+    - url: "/api"
+
+  paths:
+    /colaboradores:
+      get:
+        operationId: "employees.read_all"
+        tags:
+          - "Employees"
+        summary: "Read the list of employees"
+        responses:
+          "200":
+            description: "Successfully read employees list"
