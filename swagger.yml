@@ -7,6 +7,24 @@ info:
 servers:
   - url: "/api"
 
+components:
+  schemas:
+    Departments:
+      type: "object"
+      required:
+        - name
+      properties:
+        name:
+          type: "string"
+  parameters:
+    name:
+      name: "name"
+      description: "Name of department to get"
+      in: path
+      required: True
+      schema:
+        type: "string"
+
 paths:
   /employees:
     get:
@@ -28,6 +46,18 @@ paths:
         "200":
           description: "Successfully read departments list"
 
+  /departments/{name}:
+    get:
+      operationId: "services.get_employees_by_department_result"
+      tags:
+        - "Departments"
+      summary: "Return departments with list employees"
+      parameters:
+        - $ref: "#/components/parameters/name"
+      responses:
+        "200":
+          description: "Successfully read departments list"
+
   /dependents:
     get:
       operationId: "services.read_all_dependents"
@@ -37,4 +67,3 @@ paths:
       responses:
         "200":
           description: "Successfully read employees by department list"
-

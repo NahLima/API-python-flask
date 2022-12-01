@@ -1,6 +1,18 @@
 from flask import abort
-from models import Employees,EmployeesSchema, employees_schema, employee_schema, Departments, Dependents, dependents_schema, \
+
+from models import Employees, EmployeesSchema, employees_schema, employee_schema, Departments, Dependents, \
+    dependents_schema, \
     dependent_schema, departments_schema, department_schema
+
+import datetime
+from json import JSONEncoder
+
+
+class DateEncoder(JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, datetime.date):
+            return obj.isoformat()
+        return JSONEncoder.default(self, obj)
 
 
 def read_all_employees():
@@ -19,17 +31,32 @@ def read_all_dependents():
     return dependent_schema.dump(dependent)
 
 
-def get_employees_by_name(full_name):
-    employee = Employees.query.filter(Employees.full_name == full_name).one_or_none()
+def get_dependents(responsible_id):
+    dependents = Dependents.query.filter(Dependents.responsible_id == responsible_id).count()
+    result = [{"total_dependents": dependents}]
+    return result
 
-    if employee is not None:
-        return employees_schema.dump(employee)
-    else:
-        abort(404, f"Person with last name {full_name} not found")
 
-# def get_employees_by_department(department):
-#    employee = Employees.query.filter(Employees.full_name == department).one_or_none()
-#   if employee is not None:
-#      return employees_schema.dump(employee)
-# else:
-#    abort(404, f"Person with last name {department} not found")
+def get_employees_by_department_result(name):
+    get_department = Departments.query.filter(Departments.name == name).all()
+    dep_id = get_department[0].id
+    dep_name = get_department[0].name
+
+    get_employees = Employees.query.filter(Employees.department_id == dep_id).all()
+
+    emp_list = []
+
+    for emp in get_employees:
+        get_total_dependent = get_dependents(emp.id)
+
+        if get_total_dependent[0]['total_dependents'] > 0:
+            have_dependents = True
+        else:
+            have_dependents = False
+
+        employees_result = {"id": emp.id, "name": emp.name, "have_dependents": have_dependents}
+        emp_list.append(employees_result)
+
+    result_info = [{"Departement": dep_name, "Employees": emp_list}]
+
+    return result_info
