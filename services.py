@@ -1,18 +1,4 @@
-from flask import abort
-
-from models import Employees, EmployeesSchema, employees_schema, employee_schema, Departments, Dependents, \
-    dependents_schema, \
-    dependent_schema, departments_schema, department_schema
-
-import datetime
-from json import JSONEncoder
-
-
-class DateEncoder(JSONEncoder):
-    def default(self, obj):
-        if isinstance(obj, datetime.date):
-            return obj.isoformat()
-        return JSONEncoder.default(self, obj)
+from models import Employees, EmployeesSchema, Departments, Dependents, dependent_schema, department_schema
 
 
 def read_all_employees():
@@ -31,7 +17,7 @@ def read_all_dependents():
     return dependent_schema.dump(dependent)
 
 
-def get_dependents(responsible_id):
+def count_dependents(responsible_id):
     dependents = Dependents.query.filter(Dependents.responsible_id == responsible_id).count()
     result = [{"total_dependents": dependents}]
     return result
@@ -47,7 +33,7 @@ def get_employees_by_department_result(name):
     emp_list = []
 
     for emp in get_employees:
-        get_total_dependent = get_dependents(emp.id)
+        get_total_dependent = count_dependents(emp.id)
 
         if get_total_dependent[0]['total_dependents'] > 0:
             have_dependents = True
@@ -57,6 +43,6 @@ def get_employees_by_department_result(name):
         employees_result = {"id": emp.id, "name": emp.name, "have_dependents": have_dependents}
         emp_list.append(employees_result)
 
-    result_info = [{"Departement": dep_name, "Employees": emp_list}]
+    result_info = [{"Department": dep_name, "Employees": emp_list}]
 
     return result_info

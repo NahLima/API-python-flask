@@ -7,3 +7,10 @@ join Dependents as depend
 on responsible_id = em.id
 where em.id = 3 and depend.responsible_id = em.id
 group by em.id
+
+-- selects all
+select * from Departments
+
+select * from Dependents
+
+select * from Employees
