@@ -1,4 +1,6 @@
-from models import Employees, employee_schema, Departments, Dependents, dependent_schema, departments_schema
+from models.departments import Departments, departments_schema
+from models.dependents import Dependents, dependent_schema
+from models.employees import Employees, employee_schema
 
 
 def read_all_employees():
