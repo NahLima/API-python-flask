@@ -29,6 +29,8 @@ A página com o  Swagger UI API em: `http://127.0.0.1:8000/api/ui`
 
 ### Banco de dados
 
+![painel](imgs\BD.png )
+
 Se você não tiver em seu computador o Sqlite será necessário baixar e intalar o mesmo.
 
 link https://www.sqlite.org/index.html

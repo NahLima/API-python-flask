@@ -1,15 +1,14 @@
-from models import Employees, EmployeesSchema, Departments, Dependents, dependent_schema, department_schema
+from models import Employees, employee_schema, Departments, Dependents, dependent_schema, departments_schema
 
 
 def read_all_employees():
-    people = Employees.query.all()
-    person_schema = EmployeesSchema(many=True)
-    return person_schema.dump(people)
+    employees = Employees.query.all()
+    return employee_schema.dump(employees)
 
 
 def read_all_departments():
     department = Departments.query.all()
-    return department_schema.dump(department)
+    return departments_schema.dump(department)
 
 
 def read_all_dependents():
