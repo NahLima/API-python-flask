@@ -51,19 +51,19 @@ paths:
       operationId: "services.get_employees_by_department_result"
       tags:
         - "Departments"
-      summary: "Return departments with list employees"
+      summary: "Read the list of employees by department"
       parameters:
         - $ref: "#/components/parameters/name"
       responses:
         "200":
-          description: "Successfully read departments list"
+          description: "Successfully read employees by department list"
 
   /dependents:
     get:
       operationId: "services.read_all_dependents"
       tags:
         - "Dependents"
-      summary: "Read the list of employees by department"
+      summary: "Read the list of dependents"
       responses:
         "200":
-          description: "Successfully read employees by department list"
+          description: "Successfully read dependents list"

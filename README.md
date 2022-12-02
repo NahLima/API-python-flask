@@ -1,26 +1,32 @@
 # API-python-flask
 
-### Este projeto faz parte do desafio BackEnd Telavita.
+**Este projeto faz parte do desafio BackEnd Telavita.**
 
-_O projeto foi realizado com um PC windows._
+**Sobre o projeto:**
+- Solicitações HTTP com Connexion
+- Endpoints de API usando a especificação OpenAPI
+- Documentação de API com Swagger UI
+
+obs: _O projeto foi realizado com um PC windows._
+
 
 Para conseguir rodar o projeto em sua máquina é preciso criar o ambiente virtual:
 
 ```console
-$ python -m venv myvenv
-$ source myvenv/bin/activate
+ python -m venv myvenv
+ source myvenv/bin/activate
 ```
 
 Instalar as dependências do  `requirements.txt`:
 
 ```console
-(myvenv) $ python -m pip install -r requirements.txt
+(myvenv)  python -m pip install -r requirements.txt
 ```
 
 Na pasta `API_python_flask/`  inicie o web server:
 
 ```console
-(myvenv) $ python app.py 
+(myvenv)  python app.py 
 ```
 
 Você verá a  home page em: `http://127.0.0.1:8000`
@@ -51,6 +57,10 @@ Depois é necessário rodar os comandos, que estão no arquivo `create_data_base
 
 Para validar você pode rodar os comandos que estão no arquivo `queries.sql`
 
+### Para rodar os testes
+````console
+(myvenv)  python -m pytest 
+````
 
 
 ### Possíveis erros
