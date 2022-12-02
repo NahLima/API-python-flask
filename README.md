@@ -14,7 +14,7 @@ Para conseguir rodar o projeto em sua máquina é preciso criar o ambiente virtu
 
 ```console
  python -m venv myvenv
- source myvenv/bin/activate
+ ./myvenv/Scripts/activate
 ```
 
 Instalar as dependências do  `requirements.txt`:
